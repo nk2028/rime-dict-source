@@ -1,8 +1,7 @@
 from glob import iglob
 
 def do(file_path):
-    data_char = set()
-    data_word = set()
+    s = set()
 
     with open(file_path) as f:
         for line in f:
@@ -12,18 +11,12 @@ def do(file_path):
                 continue
 
             word, romans, *extras = line.split('\t')
-            (data_char if len(word) == 1 else data_word).add((word, romans, tuple(extras)))
+            s.add((word, romans, tuple(extras)))
 
-    data_char = sorted(data_char, key=lambda xyz: (len(xyz[0]), *xyz))
-    data_word = sorted(data_word, key=lambda xyz: (len(xyz[0]), *xyz))
+    s = sorted(s, key=lambda xyz: (len(xyz[0]), *xyz))
 
     with open(file_path, 'w') as f:
-        if data_char:
-            for ch, roman, extras in data_char:
-                print(ch, roman, *extras, sep='\t', file=f)
-            print(file=f)
-
-        for ch, roman, extras in data_word:
+        for ch, roman, extras in s:
             print(ch, roman, *extras, sep='\t', file=f)
 
 
