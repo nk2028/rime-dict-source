@@ -1,5 +1,6 @@
 from glob import iglob
 
+
 def do(file_path):
     s = set()
 
@@ -20,5 +21,6 @@ def do(file_path):
             print(ch, roman, *extras, sep='\t', file=f)
 
 
-for file_path in iglob('*.csv'):
+for file_path in iglob('*.tsv'):
     do(file_path)
+    print(f'done: {file_path}')
