@@ -12,4 +12,4 @@ In `scripts/`:
 
   - `ambi.csv`: Lists characters with the same 音韻地位 by 小韻, which could possibly have different 音韻地位 in other data sources.
 
-    Fields: 音韻地位, 小韻號 (can be `+` if it's not from 廣韻), 字
+    Fields: 音韻地位, 小韻號 (can be `+` if it's not from 廣韻), 廣韻字頭 (and variants), 外字 (whose 音韻地位 follows the corresponding 小韻)

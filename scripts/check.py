@@ -11,10 +11,15 @@ with open('chars.tsv') as fin:
         chars.setdefault(pos, set()).add(ch)
 
 coverage: dict[str, set[str]] = {}
+seen = set()
 with open('scripts/ambi.csv') as fin:
+    next(fin)  # header
     for row in csv.reader(fin):
-        pos, _idx, chs = row
-        coverage.setdefault(pos, set()).update(chs)
+        pos, idx, chs, extra_chs = row
+        assert (pos, idx) not in seen, f'duplicate key: ({pos}, {idx})'
+        assert len(set(chs)) == len(chs), f'duplicate 廣韻 chars: {row}'
+        assert len(set(extra_chs)) == len(extra_chs), f'duplicate extra chars: {row}'
+        coverage.setdefault(pos, set()).update(chs + extra_chs)
 
 success = True
 for pos, cov_chs in coverage.items():
