@@ -2,8 +2,6 @@
 
 import csv
 
-from numpy import cov
-
 chars: dict[str, set[str]] = {}
 with open('chars.tsv') as fin:
     for line in fin:
