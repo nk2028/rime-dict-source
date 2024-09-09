@@ -1,11 +1,7 @@
 {
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true
     },
-    "python.formatting.provider": "autopep8",
-    "python.formatting.autopep8Args": [
-        "--max-line-length=65536",
-        "--ignore=E302"
-    ]
+    "ruff.configurationPreference": "filesystemFirst",
 }

@@ -22,13 +22,12 @@ with open('scripts/ambi.csv') as fin:
 success = True
 for pos, cov_chs in coverage.items():
     chs = chars[pos]
-    if (missing := chs.difference(cov_chs)):
+    if missing := chs.difference(cov_chs):
         success = False
         print(f'ERROR: characters of {pos} in ambi.csv does not cover all characters in chars.tsv')
         print(f'* missing:  {"".join(sorted(missing))}')
-    if (superfluous := cov_chs.difference(chs)):
-        print(f'Warning: ambi.csv contains characters not in chars.tsv:',
-              ''.join(sorted(superfluous)))
+    if superfluous := cov_chs.difference(chs):
+        print('Warning: ambi.csv contains characters not in chars.tsv:', ''.join(sorted(superfluous)))
 
 if not success:
     exit(1)
