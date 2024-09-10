@@ -12,10 +12,22 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.9'
-    - name: Check
+        python-version: '3.12'
+    - name: Check content
       run: python scripts/check.py
+    - name: Check ordering
+      shell: bash
+      run: tmpdir="$(mktemp -d -p ~)"
+        cp *.tsv scripts/ambi.csv "$tmpdir"
+
+        python scripts/uniqsort.py
+        for i in *.tsv; do
+        diff "$i" "$tmpdir/$i"
+        done
+
+        python scripts/sort_ambi.py
+        diff scripts/ambi.csv "$tmpdir/ambi.csv"
